@@ -6,12 +6,18 @@ import Avatar from '@material-ui/core/Avatar';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { ArtistContext } from '../Context/ArtistContext';
+import AlbumsGrid from './AlbumsGrid';
 
 const useStyles = makeStyles({
+  parent: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    marginTop: '4.5rem'
+  },
   root: {
     maxWidth: 345,
-    margin: '0 auto',
-    marginTop: '3rem'
+    margin: 'auto 0',
+    display: 'inline-block'
   }
 });
 
@@ -19,8 +25,9 @@ function ArtistAvatar() {
   const classes = useStyles();
   const { artist } = useContext(ArtistContext);
   return (
-    <div>
+    <div className={classes.parent}>
       { artist && 
+      <React.Fragment>
       <Card className={classes.root}>
         <CardHeader
           avatar={
@@ -38,6 +45,8 @@ function ArtistAvatar() {
           </Typography>
         </CardContent>
       </Card>
+      <AlbumsGrid />
+      </React.Fragment>
       }
     </div>
   );

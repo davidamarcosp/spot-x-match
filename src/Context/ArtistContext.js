@@ -1,12 +1,16 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext } from 'react';
+import useArtistState from '../Hooks/useArtistState';
+import useAlbumState from '../Hooks/useAlbumState';
 
 export const ArtistContext = createContext();
 
 export function ArtistProvider(props) {
-  const [artist, setArtist] = useState();
-  const pickArtist = (artistData) => setArtist(artistData);
+
+  const [artist, pickArtist] = useArtistState();
+  const [album, pickAlbum, resetAlbum] = useAlbumState();
+
   return (
-    <ArtistContext.Provider value={{ artist, pickArtist }}>
+    <ArtistContext.Provider value={{ artist, pickArtist, album, pickAlbum, resetAlbum }}>
       {props.children}
     </ArtistContext.Provider>
   );
