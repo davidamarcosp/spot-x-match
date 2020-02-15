@@ -25,6 +25,6 @@ export default initialVal => {
   const resetLyrics = () => {
     setLyrics();
   };
-
+  
   return [lyrics, pickLyrics, resetLyrics];
 }
