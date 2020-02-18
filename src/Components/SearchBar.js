@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 function SearchBar() {
 
   const [value, handleChange, reset] = useInputState("");
-  const { pickArtist, album, resetAlbum } = useContext(ArtistContext);
+  const { pickArtist, album, resetAlbum, lyrics, resetLyrics } = useContext(ArtistContext);
 
   return (
     <form
@@ -17,6 +17,7 @@ function SearchBar() {
         e.preventDefault();
         reset();
         if(album) resetAlbum();
+        if(lyrics) resetLyrics();
         pickArtist(value);
       }}
       style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}

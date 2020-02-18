@@ -6,14 +6,14 @@ export default initialVal => {
   const mxm = new Musixmatch('724f6d4a2cffed7daf345f166c4974dd');
   const [lyrics, setLyrics] = useState(initialVal);
 
-  const pickLyrics = async (artist, song) => {
+  const pickLyrics = async (artistName, songName) => {
 
     mxm.getLyricsMatcher({
-      q_artist: artist.name.toLowerCase(),
-      q_track: song.name.toLowerCase(),
+      q_artist: artistName.toLowerCase(),
+      q_track: songName.toLowerCase(),
     })
     .then(data => {
-      let lyrics =  data.message.body.lyrics.lyrics_body;
+      let lyrics =  data.message.body.lyrics.lyrics_body.slice(0, -69);
       setLyrics(lyrics);
     })
     .catch(e => {

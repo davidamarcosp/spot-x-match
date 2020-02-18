@@ -8,17 +8,15 @@ import Album from './Album';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
+    width: 800
   },
   gridList: {
     minWidth: 680,
     maxWidth: 680,
-    minHeight: 680,
-    maxHeight: 680
+    minHeight: 676,
+    maxHeight: 676,
+    margin: 'auto !important'
   }
 }));
 

@@ -1,7 +1,8 @@
 import React from 'react';
-// import './App.css';
+import './App.css';
 import SearchBar from './Components/SearchBar';
 import ArtistAvatar from './Components/ArtistAvatar';
+import AlbumsGrid from './Components/AlbumsGrid';
 import { ArtistProvider } from './Context/ArtistContext';
 import Container from '@material-ui/core/Container';
 
@@ -9,9 +10,10 @@ function App() {
   return (
     <div className="App">
       <ArtistProvider>
-        <Container maxWidth="lg">
-          <SearchBar />
-          <ArtistAvatar/>
+        <SearchBar />
+        <Container className="container" maxWidth="lg" >
+          <ArtistAvatar />
+          <AlbumsGrid />
         </Container>
       </ArtistProvider>
     </div>

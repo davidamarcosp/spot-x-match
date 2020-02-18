@@ -19,7 +19,7 @@ function Album(props) {
 
   return (
     <div>
-      <GridListTile key={props.albumId}>
+      <GridListTile key={props.albumId} style={{ margin: '0.5px' }} >
         <img src={props.albumCover} alt={'Album cover'} style={{ height: '220px', width: '220px' }} />
         <GridListTileBar
           title={props.albumName}

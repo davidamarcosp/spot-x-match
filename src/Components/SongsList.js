@@ -1,39 +1,54 @@
 import React, { useContext } from 'react';
 import List from '@material-ui/core/List';
+import IconButton from '@material-ui/core/IconButton';
+import ChevronLeftSharpIcon from '@material-ui/icons/ChevronLeftSharp';
 import { ArtistContext } from '../Context/ArtistContext';
 import { makeStyles } from '@material-ui/core/styles';
 import Song from '../Components/Song';
-
-const useStyles = makeStyles(theme => ({
-  list: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  }
-}));
+import Lyrics from '../Components/Lyrics';
 
 function SongList() {
 
-  const { album, resetAlbum, resetLyrics } = useContext(ArtistContext);
+  const { album, resetAlbum, lyrics, resetLyrics } = useContext(ArtistContext);
+
+  const useStyles = makeStyles(theme => ({
+    list: {
+      width: lyrics ? '330px' : '450px',
+      minWidth: 300,
+      maxHeight: 676,
+      overflow: 'auto',
+      backgroundColor: theme.palette.background.paper,
+      padding: 0
+    }
+  }));
+
   const classes = useStyles();
 
   return (
-    <div>
-      <button 
+    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+      <IconButton
         onClick={
-          () => { 
-            resetAlbum(); 
-            resetLyrics() 
+          () => {
+            resetAlbum();
+            resetLyrics()
           }}
+        style={{
+          height: '65px',
+          width: '65px',
+          alignSelf: 'center'
+        }}
       >
-        BACK
-      </button>
-      <List component="nav" className={classes.list} aria-label="mailbox folders" style={{ marginRight: 'auto ' }}>
+        <ChevronLeftSharpIcon fontSize='large' />
+      </IconButton>
+      <List component="nav" className={classes.list} aria-label="song list">
         {album.map(song => {
-          return <Song songName={song.name} />
+          return <Song songName={song.name} songUrl={song.preview_url} />
         })}
       </List>
-      {/* <p>{lyrics}</p> */}
+      {
+        lyrics &&
+        <Lyrics songLyrics={lyrics} />
+      }
     </div>
   );
 };
