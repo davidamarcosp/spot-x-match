@@ -13,8 +13,12 @@ export default initialVal => {
       q_track: songName.toLowerCase(),
     })
     .then(data => {
+      if(data.message.header.status_code === 404){
+        setLyrics(false);
+      } else {
       let lyrics =  data.message.body.lyrics.lyrics_body.slice(0, -69);
       setLyrics(lyrics);
+      }
     })
     .catch(e => {
       console.error(e);

@@ -1,18 +1,18 @@
 import SpotifyWebApi from 'spotify-web-api-node';
-// import useTokenState from '../Hooks/useTokenState';
 import { useState } from "react";
 
 export default initialVal => {
 
   const spotifyApi = new SpotifyWebApi();
-  // const [isTokenExpired] = useTokenState();
   const [album, setAlbum] = useState(initialVal);
 
-  const pickAlbum = async (albumID) => {
+  const pickAlbum = async (albumID, token) => {
 
-    spotifyApi.setAccessToken(localStorage.getItem('token'));
+    spotifyApi.setAccessToken(token);
     spotifyApi.getAlbumTracks(albumID)
     .then(data => {
+      // let asd = data.body.items.filter(song => song.preview_url !== null);
+      // console.log(asd);
       setAlbum(data.body.items);
     })
     .catch(e => {

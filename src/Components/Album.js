@@ -14,11 +14,11 @@ const useStyles = makeStyles({
 
 function Album(props) {
 
-  const { pickAlbum } = useContext(ArtistContext);
+  const { artist, pickAlbum, isTokenExpired } = useContext(ArtistContext);
   const classes = useStyles();
 
   return (
-    <div>
+    <div style={{ margin: artist.albums.length < 3 ? 'auto' : '' }}>
       <GridListTile key={props.albumId} style={{ margin: '0.5px' }} >
         <img src={props.albumCover} alt={'Album cover'} style={{ height: '220px', width: '220px' }} />
         <GridListTileBar
@@ -27,7 +27,7 @@ function Album(props) {
           actionIcon={
             <IconButton
               className={classes.icon}
-              onClick={() => pickAlbum(props.albumId)}
+              onClick={ async () => await pickAlbum(props.albumId, await isTokenExpired()) }
             >
               <InfoIcon />
             </IconButton>

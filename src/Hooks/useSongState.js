@@ -5,8 +5,8 @@ export default initialVal => {
   const [song, setSong] = useState(initialVal);
   const [playing, setPlaying] = useState(false);
 
-  const pickSong = (songUrl) => {
-    setSong(songUrl);
+  const pickSong = (songUrl, songName) => {
+    setSong({ songUrl: songUrl, songName: songName });
   }
 
   const play = () => {

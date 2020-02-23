@@ -1,16 +1,14 @@
 import SpotifyWebApi from 'spotify-web-api-node';
-import useTokenState from '../Hooks/useTokenState';
 import { useState } from "react";
 
 export default initialVal => {
 
   const spotifyApi = new SpotifyWebApi();
-  const [isTokenExpired] = useTokenState();
   const [artist, setArtist] = useState(initialVal);
 
-  const pickArtist = async (artistName) => {
+  const pickArtist = async (artistName, token) => {
 
-    spotifyApi.setAccessToken(isTokenExpired());
+    spotifyApi.setAccessToken(token);
     spotifyApi.searchArtists(artistName, { limit: 1 })
     .then(data => {
       let artistResponse = data.body.artists.items[0];

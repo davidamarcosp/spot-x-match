@@ -3,6 +3,7 @@ import useArtistState from '../Hooks/useArtistState';
 import useAlbumState from '../Hooks/useAlbumState';
 import useLyricState from '../Hooks/useLyricState';
 import useSongState from '../Hooks/useSongState';
+import useTokenState from '../Hooks/useTokenState';
 
 export const ArtistContext = createContext();
 
@@ -12,6 +13,7 @@ export function ArtistProvider(props) {
   const [album, pickAlbum, resetAlbum] = useAlbumState();
   const [lyrics, pickLyrics, resetLyrics] = useLyricState();
   const [song, pickSong, playing, play] = useSongState();
+  const [isTokenExpired] = useTokenState();
 
   return (
     <ArtistContext.Provider 
@@ -27,7 +29,8 @@ export function ArtistProvider(props) {
         song,
         pickSong,
         playing,
-        play 
+        play,
+        isTokenExpired
       }}
     >
       {props.children}

@@ -10,3 +10,11 @@ video:focus {
   align-items: center;
   margin-top: 3rem;
 }
+
+video::-webkit-media-controls-panel{
+  background: linear-gradient(90deg, rgba(184,183,200,1) 0%, rgba(153,153,158,1) 0%, rgba(213,213,213,1) 65%);
+}
+
+/* body {
+  background-color: gray;
+} */

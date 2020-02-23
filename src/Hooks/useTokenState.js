@@ -3,10 +3,10 @@ import axios from 'axios';
 
 export default initialVal => {
 
-  const [isTokenValid, setToken] = useState(initialVal);
+  const [token, setToken] = useState(initialVal);
 
   useEffect(() => {
-    if(!isTokenValid){
+    if(!token){
       axios.get('http://localhost:3001/')
       .then(res => {
         console.log('Token: ', res.data.access_token);
@@ -15,7 +15,7 @@ export default initialVal => {
         setToken(true);
       });
     };
-  }, [isTokenValid]);
+  }, [token]);
 
   const getExpirationDate = (seconds) => {
     let miliseconds = (seconds * 1000 + Date.now());
@@ -27,6 +27,9 @@ export default initialVal => {
     let expiration = localStorage.getItem('token_expires_in');
     if(new Date() > expiration){
       setToken(false);
+      setTimeout(() => {
+        return localStorage.getItem('token');
+      }, 1500);
     } else {
       return localStorage.getItem('token');
     };

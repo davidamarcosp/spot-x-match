@@ -1,56 +1,55 @@
 import React, { useContext } from 'react';
+import { ArtistContext } from '../Context/ArtistContext';
 import List from '@material-ui/core/List';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftSharpIcon from '@material-ui/icons/ChevronLeftSharp';
-import { ArtistContext } from '../Context/ArtistContext';
-import { makeStyles } from '@material-ui/core/styles';
+import Divider from '@material-ui/core/Divider';
 import Song from '../Components/Song';
 import Lyrics from '../Components/Lyrics';
+import { withStyles } from '@material-ui/core/styles';
+import styles from '../Styles/SongListStyles';
 
-function SongList() {
+import Snackbar from '@material-ui/core/Snackbar';
 
-  const { album, resetAlbum, lyrics, resetLyrics } = useContext(ArtistContext);
+function SongList(props) {
 
-  const useStyles = makeStyles(theme => ({
-    list: {
-      width: lyrics ? '330px' : '450px',
-      minWidth: 300,
-      maxHeight: 676,
-      overflow: 'auto',
-      backgroundColor: theme.palette.background.paper,
-      padding: 0
-    }
-  }));
-
-  const classes = useStyles();
+  const { album, resetAlbum, lyrics, resetLyrics, playing } = useContext(ArtistContext);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+    <div className={props.classes.root}>
       <IconButton
+        className={props.classes.button}
         onClick={
           () => {
             resetAlbum();
-            resetLyrics()
+            resetLyrics();
           }}
-        style={{
-          height: '65px',
-          width: '65px',
-          alignSelf: 'center'
-        }}
       >
         <ChevronLeftSharpIcon fontSize='large' />
       </IconButton>
-      <List component="nav" className={classes.list} aria-label="song list">
-        {album.map(song => {
-          return <Song songName={song.name} songUrl={song.preview_url} />
+      <List
+        className={props.classes.list}
+        component="nav"
+        aria-label="song list"
+        style={{ width: lyrics ? '330px' : '450px' }}
+      >
+        <Divider />
+        {album.map((song, i) => {
+          return <Song songName={song.name} songUrl={song.preview_url} index={i + 1} />
         })}
       </List>
       {
+        lyrics === false &&
+        <Snackbar open={true} autoHideDuration={1000}>
+          <h1>no hay letra wacho</h1>
+        </Snackbar>
+      }
+      {
         lyrics &&
-        <Lyrics songLyrics={lyrics} />
+        <Lyrics songLyrics={lyrics} playing={playing} />
       }
     </div>
   );
 };
 
-export default SongList;
+export default withStyles(styles)(SongList);

@@ -4,24 +4,32 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 
-
 function Song(props) {
 
   const { artist, pickLyrics, pickSong, play } = useContext(ArtistContext);
-  console.log('render');
 
   return (
     <div>
       <ListItem button
         onClick={() => {
           pickLyrics(artist.name, props.songName);
-          pickSong(props.songUrl);
+          pickSong(props.songUrl, props.songName);
           play();
         }}
+        style={{ height: '66px' }}
+        disabled={props.songUrl === null ? true : false}
       >
         <ListItemText
-          primary={props.songName}
-        />
+          secondary={props.songUrl === null ? 'No song available :(' : ''}
+          secondaryTypographyProps={{
+            style: {
+              marginLeft: '23px'
+            }
+          }}
+        >
+          <span style={{ fontWeight: '600', fontSize: '14px' }}>{props.index}</span>
+          <span style={{ marginLeft: '15px' }}>{props.songName}</span>
+        </ListItemText>
       </ListItem>
       <Divider />
     </div>
