@@ -1,45 +1,40 @@
 import React, { useContext } from 'react';
 import { ArtistContext } from '../Context/ArtistContext';
 import List from '@material-ui/core/List';
-import IconButton from '@material-ui/core/IconButton';
-import ChevronLeftSharpIcon from '@material-ui/icons/ChevronLeftSharp';
 import Divider from '@material-ui/core/Divider';
+import Lyrics from '../Components/Lyrics';
+import Single from '../Components/Single';
 import Snackbar from '@material-ui/core/Snackbar';
 import Slide from '@material-ui/core/Slide';
-import Song from '../Components/Song';
-import Lyrics from '../Components/Lyrics';
 import { withStyles } from '@material-ui/core/styles';
-import styles from '../Styles/SongListStyles';
+import styles from '../Styles/SinglesListStyles';
 
 function TransitionUp(props) {
   return <Slide {...props} direction="up" />;
 }
 
-function SongList(props) {
+function SinglesList(props) {
 
-  const { album, resetAlbum, lyrics, resetLyrics, playing } = useContext(ArtistContext);
+  const { artist, lyrics, playing } = useContext(ArtistContext);
 
   return (
     <div className={props.classes.root}>
-      <IconButton
-        className={props.classes.button}
-        onClick={
-          () => {
-            resetAlbum();
-            resetLyrics();
-          }}
-      >
-        <ChevronLeftSharpIcon fontSize='large' />
-      </IconButton>
       <List
         className={props.classes.list}
         component="nav"
         aria-label="song list"
-        style={{ width: lyrics ? '330px' : '450px' }}
+        style={{ width: lyrics ? '370px' : '450px' }}
       >
         <Divider />
-        {album.map((song, i) => {
-          return <Song songName={song.name} songUrl={song.preview_url} index={i + 1} key={song.id} />
+        {artist.singles.map((single) => {
+          return (<Single
+            songName={single.name}
+            songImage={single.image}
+            singleID={single.id}
+            key={single.id}
+            releasedDate={single.release_date}
+            songUrl={single.preview_url}
+          />)
         })}
       </List>
       {
@@ -47,7 +42,7 @@ function SongList(props) {
         <Snackbar
           open={true}
           message='NO LYRICS AVAILABLE'
-          TransitionComponent={TransitionUp} 
+          TransitionComponent={TransitionUp}
           ContentProps={{
             classes: {
               message: props.classes.snackbarText,
@@ -64,4 +59,4 @@ function SongList(props) {
   );
 };
 
-export default withStyles(styles)(SongList);
+export default withStyles(styles)(SinglesList);

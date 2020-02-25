@@ -1,31 +1,38 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Grow from '@material-ui/core/Grow';
+import { withStyles } from "@material-ui/core/styles";
+import styles from '../Styles/LyricsStyles';
+import IconButton from '@material-ui/core/IconButton';
+import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
+import { ArtistContext } from '../Context/ArtistContext';
 
 function Lyrics(props) {
 
+  const { resetLyrics } = useContext(ArtistContext);
+
   return (
     <Grow in={props.playing}>
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <TextareaAutosize
-          rowsMin={20}
-          aria-label="maximum height"
-          value={props.songLyrics}
-          style={{
-            color: 'gray',
-            fontFamily: 'Roboto',
-            width: '200px',
-            minWidth: '300px',
-            maxWidth: '300px',
-            height: 'auto',
-            maxHeight: '676px',
-            textAlign: 'center',
-            marginLeft: '20px'
-          }}
-        />
+      <div className={props.classes.lyricsWrapper}>
+        <div>
+          <IconButton
+            aria-label="delete"
+            style={{ marginBottom: '4px', marginRight: 'auto', position: 'absolute' }}
+            onClick={() => resetLyrics()}
+            size='small'
+          >
+            <CloseOutlinedIcon />
+          </IconButton>
+          <TextareaAutosize
+            className={props.classes.lyrics}
+            rowsMin={20}
+            aria-label="maximum height"
+            value={props.songLyrics}
+          />
+        </div>
       </div>
     </Grow>
   );
 }
 
-export default Lyrics;
+export default withStyles(styles)(Lyrics);

@@ -1,13 +1,8 @@
 export default {
-  wrapper: {
-    display: 'flex',
-    justifyContent: 'space-around',
-    marginTop: '4.5rem'
-  },
   artistWrapper: {
     display: 'flex',
+    justifyContent: 'space-around',
     flexDirection: 'column',
-    justifyContent: 'center',
     alignItems: 'center'
   },
   artistCard: {
@@ -30,7 +25,8 @@ export default {
     textShadow: '4px 4px 6px rgba(66,66,66,0.77)'
   },
   playerWrapper: {
-    maxWidth: '330px'
+    maxWidth: '330px',
+    transition: 'opacity 0.3s ease-in'
   },
   nowPlaying: {
     maxHeight: '31px',

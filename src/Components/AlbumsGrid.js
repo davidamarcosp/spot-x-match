@@ -2,30 +2,19 @@ import React, { useContext } from 'react';
 import { ArtistContext } from '../Context/ArtistContext';
 import GridList from '@material-ui/core/GridList';
 import SongList from './SongsList';
+import SinglesList from './SinglesList';
 import Album from './Album';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
+import styles from '../Styles/AlbumGridStyles';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    backgroundColor: theme.palette.background.paper,
-    width: 800
-  },
-  gridList: {
-    width: 680,
-    maxHeight: 676,
-    margin: 'auto !important'
-  }
-}));
+function AlbumsGrid(props) {
 
-function AlbumsGrid() {
-
-  const { artist, album } = useContext(ArtistContext);
-  const classes = useStyles();
+  const { artist, album, singles } = useContext(ArtistContext);
 
   return (
-    <div className={classes.root}>
-      {artist && !album &&
-        <GridList cellHeight='auto' className={classes.gridList}>
+    <div className={props.classes.root}>
+      {artist && !album && !singles &&
+        <GridList cellHeight='auto' className={props.classes.gridList}>
           {artist.albums.map(album => (
             <Album 
               albumId={album.id}
@@ -41,8 +30,12 @@ function AlbumsGrid() {
         album &&
         <SongList />
       }
+      {
+        artist && singles &&
+        <SinglesList />
+      }
     </div>
   );
 }
 
-export default AlbumsGrid;
+export default withStyles(styles)(AlbumsGrid);

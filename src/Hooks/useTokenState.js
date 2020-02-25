@@ -6,14 +6,17 @@ export default initialVal => {
   const [token, setToken] = useState(initialVal);
 
   useEffect(() => {
-    if(!token){
+    if (!token) {
       axios.get('http://localhost:3001/')
-      .then(res => {
-        console.log('Token: ', res.data.access_token);
-        localStorage.setItem('token', res.data.access_token);
-        localStorage.setItem('token_expires_in', getExpirationDate(res.data.expires_in));
-        setToken(true);
-      });
+        .then(res => {
+          console.log('Token: ', res.data.access_token);
+          localStorage.setItem('token', res.data.access_token);
+          localStorage.setItem('token_expires_in', getExpirationDate(res.data.expires_in));
+          setToken(true);
+        })
+        .catch(e => {
+          console.log(e);
+        })
     };
   }, [token]);
 
@@ -23,13 +26,16 @@ export default initialVal => {
     return miliseconds;
   };
 
-  const isTokenExpired = () => {
+  const Wait = (ms) => {
+    return new Promise(resolve => setTimeout(resolve, ms))
+  };
+
+  const isTokenExpired = async () => {
     let expiration = localStorage.getItem('token_expires_in');
-    if(new Date() > expiration){
+    if (new Date() > expiration) {
       setToken(false);
-      setTimeout(() => {
-        return localStorage.getItem('token');
-      }, 1500);
+      await Wait(500);
+      return localStorage.getItem('token');
     } else {
       return localStorage.getItem('token');
     };

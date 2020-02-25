@@ -1,7 +1,8 @@
 export default {
   root: {
     display: 'flex', 
-    minHeight: '676px'
+    minHeight: '676px',
+    justifyContent: 'space-between'
   },
   list: {
     maxHeight: 676,
@@ -12,7 +13,8 @@ export default {
   button: {
     height: '65px',
     width: '65px',
-    marginLeft: '1rem',
+    marginRight: 'auto',
+    marginLeft: '2rem',
     alignSelf: 'center'
   },
   snackbarText: {

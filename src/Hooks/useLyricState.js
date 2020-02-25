@@ -13,7 +13,7 @@ export default initialVal => {
       q_track: songName.toLowerCase(),
     })
     .then(data => {
-      if(data.message.header.status_code === 404){
+      if(data.message.header.status_code === 404 || data.message.body.lyrics.lyrics_body === ""){
         setLyrics(false);
       } else {
       let lyrics =  data.message.body.lyrics.lyrics_body.slice(0, -69);
@@ -31,4 +31,5 @@ export default initialVal => {
   };
   
   return [lyrics, pickLyrics, resetLyrics];
-}
+
+};
