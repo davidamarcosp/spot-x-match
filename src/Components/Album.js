@@ -2,8 +2,6 @@ import React, { useContext } from 'react';
 import { ArtistContext } from '../Context/ArtistContext';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
 import { withStyles } from '@material-ui/core/styles';
 import styles from '../Styles/AlbumStyles';
 
@@ -16,6 +14,11 @@ function Album(props) {
       <GridListTile
         className={props.classes.albumGrid}
         key={props.albumId}
+        onClick={
+          async () => {
+            await pickAlbum(props.albumId, await isTokenExpired())
+          }
+        }
       >
         <img
           className={props.classes.albumArt}
@@ -25,14 +28,6 @@ function Album(props) {
         <GridListTileBar
           title={props.albumName}
           subtitle={<span>Released: {props.releasedDate}</span>}
-          actionIcon={
-            <IconButton
-              className={props.classes.icon}
-              onClick={async () => await pickAlbum(props.albumId, await isTokenExpired())}
-            >
-              <InfoIcon />
-            </IconButton>
-          }
         />
       </GridListTile>
     </div>

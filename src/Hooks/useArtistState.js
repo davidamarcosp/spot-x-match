@@ -8,12 +8,14 @@ export default initialVal => {
 
   const pickArtist = async (artistName, token) => {
 
-    let singlos = [];
-
     spotifyApi.setAccessToken(token);
     spotifyApi.searchArtists(artistName, { limit: 1 })
       .then(data => {
         let artistResponse = data.body.artists.items[0];
+        // if(!artistResponse){
+        //   setArtist(null);
+        //   throw new Error ('Artist not found');
+        // }
         let artistMetaData = {
           id: artistResponse.id,
           name: artistResponse.name,
@@ -22,7 +24,7 @@ export default initialVal => {
           url: artistResponse.external_urls
         }
         spotifyApi.getArtistAlbums(artistResponse.id, { limit: 50 })
-          .then(data => {
+          .then(async data => {
             let albumsResponse = data.body.items;
             artistMetaData = {
               ...artistMetaData,
@@ -33,37 +35,41 @@ export default initialVal => {
                     return a.name.toUpperCase() === album.name.toUpperCase()
                   });
                 }),
-              singles: albumsResponse
+              singles: await Promise.all(albumsResponse
                 .filter(album => album.album_type === 'single')
                 .filter((single, index, arr) => {
                   return index === arr.findIndex((s) => {
                     return s.name.toUpperCase() === single.name.toUpperCase()
                   });
                 })
-                .map( s => {
-                  spotifyApi.getAlbumTracks(s.id)
-                  .then( data => {
-                    let preview_url = data.body.items[0].preview_url;
-                    let name = data.body.items[0].name;
-                    let release_date = s.release_date;
-                    let image = s.images[2].url;
-                    let id = s.id;
-                    let singleMetadata = {name, release_date, image, id, preview_url};
-                    singlos.push(singleMetadata);
-                  })
-                  .catch(e => {
-                    console.log(e);
-                  })
-                })
+                .map(async s => {
+                  return spotifyApi.getAlbumTracks(s.id)
+                    .then(data => {
+                      let preview_url = data.body.items[0].preview_url;
+                      let name = data.body.items[0].name;
+                      let release_date = s.release_date;
+                      let image = s.images[2].url;
+                      let id = s.id;
+                      let singleMetadata = { name, release_date, image, id, preview_url };
+                      return singleMetadata;
+                    })
+                    .catch(e => {
+                      console.log(e);
+                    })
+                }))
             };
-            artistMetaData.singles = singlos;
             setArtist(artistMetaData);
           })
           .catch(e => {
             console.log(e);
           });
       })
+      .catch(e => {
+        console.log(e);
+      })
 
   };
+
   return [artist, pickArtist];
+
 };

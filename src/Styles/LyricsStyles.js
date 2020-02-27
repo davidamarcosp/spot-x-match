@@ -15,5 +15,10 @@ export default {
     textAlign: 'center',
     padding: '25px',
     borderRadius: '5px'
+  },
+  button: {
+    marginBottom: '4px', 
+    marginRight: 'auto', 
+    position: 'absolute'
   }
-}
+};

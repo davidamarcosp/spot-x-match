@@ -9,7 +9,7 @@ import styles from '../Styles/SearchBarStyles';
 function SearchBar(props) {
 
   const [value, handleChange, reset] = useInputState("");
-  const { artist, pickArtist, album, resetAlbum, lyrics, resetLyrics, isTokenExpired, handleSingleChange } = useContext(ArtistContext);
+  const { artist, pickArtist, album, resetAlbum, lyrics, resetLyrics, isTokenExpired } = useContext(ArtistContext);
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -28,7 +28,6 @@ function SearchBar(props) {
         await pickArtist(value, await isTokenExpired());
         if (album) resetAlbum();
         if (lyrics) resetLyrics();
-        handleSingleChange(false);
         setLoading(true);
       }}
     >

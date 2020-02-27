@@ -12,42 +12,40 @@ function Single(props) {
 
   const { artist, pickLyrics, play, pickSong } = useContext(ArtistContext);
 
-  console.log('RENDER');
-
   return (
     <div>
       <ListItem
-        className={props.classes.song}
+        className={props.classes.single}
         button
         onClick={async () => {
-          pickLyrics(artist.name, props.songName);
-          pickSong(props.songUrl, props.songName);
+          pickLyrics(artist.name, props.singleName);
+          pickSong(props.singleUrl, props.singleName);
           play();
         }}
-        disabled={props.songUrl === null ? true : false}
+        disabled={props.singleUrl === null ? true : false}
       >
         <ListItemAvatar>
           <Avatar
-            src={props.songImage}
+            className={props.classes.singleImage}
+            src={props.singleImage}
             variant='rounded'
-            style={{ height: '70px', width: '70px' }}
           />
         </ListItemAvatar>
         <ListItemText
-          secondary={props.songUrl === null ? 'No song available :(' : ''}
+          secondary={props.singleUrl === null ? 'No song available' : ''}
           secondaryTypographyProps={{
             classes: {
-              root: props.classes.songSubtext
+              root: props.classes.singleSubtext
             }
           }}
           primaryTypographyProps={{
             noWrap: true
           }}
         >
-          <div style={{ overflow: "hidden", textOverflow: "ellipsis" }}>
-            <span className={props.classes.songName} >{props.songName}</span>
+          <div className={props.classes.singleNameWrapper} >
+            <span className={props.classes.singleName} >{props.singleName}</span>
           </div>
-          <p className={props.classes.songNumber} >{`Released: ${props.releasedDate}`}</p>
+          <p className={props.classes.releasedDate} >{`Released: ${props.releasedDate}`}</p>
         </ListItemText>
       </ListItem>
       <Divider />

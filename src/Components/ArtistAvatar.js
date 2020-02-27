@@ -23,7 +23,7 @@ function ArtistAvatar(props) {
       {artist &&
         <div className={props.classes.artistWrapper}>
           <ToggleButtonGroup
-            value={singles === undefined || singles === false ? false : true}
+            value={singles ? true : false}
             exclusive
             onChange={handleSingleChange}
             aria-label="text alignment"
@@ -40,11 +40,7 @@ function ArtistAvatar(props) {
             <ToggleButton
               value={false}
               aria-label="album-option"
-              disabled={
-                singles === undefined || singles === false
-                  ? true
-                  : false
-              }
+              disabled={!singles ? true : false}
             >
               {'albums'}
             </ToggleButton>
@@ -69,7 +65,10 @@ function ArtistAvatar(props) {
                 align='center'
               >
                 {artist.name.toUpperCase()}
-                <Tooltip title='Click to open on Spotify' style={{ position: 'relative', top: '5px', left: '10px', color: 'rgb(38, 38, 38)' }}>
+                <Tooltip
+                  className={props.classes.artistTooltip}
+                  title='Click to open on Spotify'
+                >
                   <LibraryMusicIcon onClick={() => console.log('CLICK')} />
                 </Tooltip>
               </Typography>
@@ -92,7 +91,8 @@ function ArtistAvatar(props) {
               gutterBottom noWrap={true}
               variant="overline"
               component="h4"
-              align='center'>
+              align='center'
+            >
               {`Playing: ${song ? song.songName : ''}`}
             </Typography>
           </div>

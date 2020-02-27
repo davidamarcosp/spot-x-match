@@ -24,6 +24,12 @@ export default {
     color: 'white',
     textShadow: '4px 4px 6px rgba(66,66,66,0.77)'
   },
+  artistTooltip: {
+    position: 'relative', 
+    top: '5px', 
+    left: '10px', 
+    color: 'rgb(38, 38, 38)'
+  },
   playerWrapper: {
     maxWidth: '330px',
     transition: 'opacity 0.3s ease-in'

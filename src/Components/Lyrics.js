@@ -16,8 +16,8 @@ function Lyrics(props) {
       <div className={props.classes.lyricsWrapper}>
         <div>
           <IconButton
+            className={props.classes.button}
             aria-label="delete"
-            style={{ marginBottom: '4px', marginRight: 'auto', position: 'absolute' }}
             onClick={() => resetLyrics()}
             size='small'
           >

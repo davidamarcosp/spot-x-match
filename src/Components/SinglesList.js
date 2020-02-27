@@ -28,12 +28,12 @@ function SinglesList(props) {
         <Divider />
         {artist.singles.map((single) => {
           return (<Single
-            songName={single.name}
-            songImage={single.image}
+            singleName={single.name}
+            singleImage={single.image}
             singleID={single.id}
             key={single.id}
             releasedDate={single.release_date}
-            songUrl={single.preview_url}
+            singleUrl={single.preview_url}
           />)
         })}
       </List>
