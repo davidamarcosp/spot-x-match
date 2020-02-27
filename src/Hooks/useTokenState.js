@@ -5,11 +5,11 @@ export default initialVal => {
 
   const [token, setToken] = useState(initialVal);
 
-  // let authServer = process.env.AUTH_SERVER ? process.env.AUTH_SERVER : 'http://localhost:3001/';
+  let authServer = process.env.AUTH_SERVER ? process.env.AUTH_SERVER : 'http://localhost:3001/';
 
   useEffect(() => {
     if (!token) {
-      axios.get('https://spot-x-match-authserver.herokuapp.com/')
+      axios.get(authServer)
         .then(res => {
           console.log('Token: ', res.data.access_token);
           localStorage.setItem('token', res.data.access_token);
