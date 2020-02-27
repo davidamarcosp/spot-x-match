@@ -5,9 +5,12 @@ export default initialVal => {
 
   const [token, setToken] = useState(initialVal);
 
+  // let authServer = process.env.AUTH_SERVER ? process.env.AUTH_SERVER : 'http://localhost:3001/';
+  let authServer = 'http://localhost:3001/';
+
   useEffect(() => {
     if (!token) {
-      axios.get('http://localhost:3001/')
+      axios.get(authServer)
         .then(res => {
           console.log('Token: ', res.data.access_token);
           localStorage.setItem('token', res.data.access_token);
@@ -18,7 +21,7 @@ export default initialVal => {
           console.log(e);
         })
     };
-  }, [token]);
+  }, [token, authServer]);
 
   const getExpirationDate = (seconds) => {
     let miliseconds = (seconds * 1000 + Date.now());
