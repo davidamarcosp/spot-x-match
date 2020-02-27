@@ -20,7 +20,7 @@ export default initialVal => {
           console.log(e);
         })
     };
-  }, [token]);
+  }, [token, authServer]);
 
   const getExpirationDate = (seconds) => {
     let miliseconds = (seconds * 1000 + Date.now());
