@@ -5,8 +5,7 @@ export default initialVal => {
 
   const [token, setToken] = useState(initialVal);
 
-  // let authServer = process.env.AUTH_SERVER ? process.env.AUTH_SERVER : 'http://localhost:3001/';
-  let authServer = 'http://localhost:3001/';
+  let authServer = process.env.AUTH_SERVER ? process.env.AUTH_SERVER : 'http://localhost:3001/';
 
   useEffect(() => {
     if (!token) {
