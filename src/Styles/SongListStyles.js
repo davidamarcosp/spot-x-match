@@ -5,15 +5,22 @@ export default {
   },
   list: {
     maxHeight: 676,
-    overflow: 'auto',
+    overflow: 'hidden',
     padding: 0,
-    margin: 'auto'
+    margin: 'auto',
+    '&:hover':{
+      overflow: 'auto'
+    }
   },
   button: {
     height: '65px',
     width: '65px',
     marginLeft: '1rem',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    color: '#1e88e5',
+    '&:hover': {
+      backgroundColor: '#e0e0e0'
+    }
   },
   snackbarText: {
     color: 'white',
@@ -25,6 +32,9 @@ export default {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#868686'
+    backgroundColor: '#1565c0'
+  },
+  divider: {
+    backgroundColor: 'gray'
   }
 }

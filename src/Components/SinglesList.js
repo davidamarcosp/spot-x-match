@@ -25,7 +25,7 @@ function SinglesList(props) {
         aria-label="song list"
         style={{ width: lyrics ? '370px' : '450px' }}
       >
-        <Divider />
+        <Divider classes={{ root: props.classes.divider }} />
         {artist.singles.map((single) => {
           return (<Single
             singleName={single.name}

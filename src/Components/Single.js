@@ -48,7 +48,7 @@ function Single(props) {
           <p className={props.classes.releasedDate} >{`Released: ${props.releasedDate}`}</p>
         </ListItemText>
       </ListItem>
-      <Divider />
+      <Divider classes={{ root: props.classes.divider }} />
     </div>
   );
 }

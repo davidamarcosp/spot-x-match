@@ -1,6 +1,6 @@
 export default {
   root: {
-    width: 800
+    width: 850
   },
   gridList: {
     width: 680,

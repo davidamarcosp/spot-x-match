@@ -14,7 +14,7 @@ export function ArtistProvider(props) {
   const [album, pickAlbum, resetAlbum] = useAlbumState();
   const [lyrics, pickLyrics, resetLyrics] = useLyricState();
   const [song, pickSong, playing, play] = useSongState();
-  const [isTokenExpired] = useTokenState();
+  const [isTokenExpired, token] = useTokenState();
   const [singles, handleSingleChange, resetSingles] = useSingleState(false);
 
   return (
@@ -33,6 +33,7 @@ export function ArtistProvider(props) {
         playing,
         play,
         isTokenExpired,
+        token,
         singles,
         handleSingleChange,
         resetSingles

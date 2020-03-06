@@ -12,10 +12,10 @@ export default initialVal => {
     spotifyApi.searchArtists(artistName, { limit: 1 })
       .then(data => {
         let artistResponse = data.body.artists.items[0];
-        // if(!artistResponse){
-        //   setArtist(null);
-        //   throw new Error ('Artist not found');
-        // }
+        if(!artistResponse){
+          setArtist(false);
+          return;
+        }
         let artistMetaData = {
           id: artistResponse.id,
           name: artistResponse.name,

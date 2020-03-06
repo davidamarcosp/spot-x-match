@@ -27,13 +27,15 @@ function ArtistAvatar(props) {
             exclusive
             onChange={handleSingleChange}
             aria-label="text alignment"
-            style={{ marginBottom: '20px' }}
+            style={{ marginBottom: '20px', backgroundColor: '#1e88e5' }}
           >
             <ToggleButton
               value={true}
               aria-label="singles-option"
               disabled={singles ? true : false}
               onClick={() => resetAlbum()}
+              style={{ color: '#000000' }}
+              classes={{ disabled: props.classes.buttonDisable }}
             >
               {'singles'}
             </ToggleButton>
@@ -41,6 +43,8 @@ function ArtistAvatar(props) {
               value={false}
               aria-label="album-option"
               disabled={!singles ? true : false}
+              style={{ color: '#000000' }}
+              classes={{ disabled: props.classes.buttonDisable }}
             >
               {'albums'}
             </ToggleButton>
@@ -69,7 +73,7 @@ function ArtistAvatar(props) {
                   className={props.classes.artistTooltip}
                   title='Click to open on Spotify'
                 >
-                  <LibraryMusicIcon onClick={() => console.log('CLICK')} />
+                  <LibraryMusicIcon onClick={() => window.open(artist.url.spotify, '_blank') } />
                 </Tooltip>
               </Typography>
             </CardContent>
@@ -84,7 +88,7 @@ function ArtistAvatar(props) {
               config={{ file: { attributes: { controlsList: 'nodownload' } } }} // Disable download button
               onContextMenu={e => e.preventDefault()} // Disable right click
               className={props.classes.player}
-              volume={0.1}
+              volume={0.15}
             />
             <Typography
               className={props.classes.nowPlaying}

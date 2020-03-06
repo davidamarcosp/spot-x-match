@@ -34,7 +34,7 @@ function Song(props) {
           <span className={props.classes.songName} >{props.songName}</span>
         </ListItemText>
       </ListItem>
-      <Divider />
+      <Divider classes={{ root: props.classes.divider }} />
     </div>
   );
 }

@@ -43,7 +43,7 @@ export default initialVal => {
     };
   };
 
-  return [isTokenExpired];
+  return [isTokenExpired, token];
 
 };
 

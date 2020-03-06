@@ -6,9 +6,12 @@ export default {
   },
   list: {
     maxHeight: 676,
-    overflow: 'auto',
+    overflow: 'hidden',
     padding: 0,
-    margin: 'auto'
+    margin: 'auto',
+    '&:hover': {
+      overflow: 'auto'
+    }
   },
   button: {
     height: '65px',
@@ -27,6 +30,9 @@ export default {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#868686'
+    backgroundColor: '#1565c0'
+  },
+  divider: {
+    backgroundColor: 'gray'
   }
 }

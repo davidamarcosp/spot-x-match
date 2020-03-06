@@ -37,7 +37,7 @@ function SongList(props) {
         aria-label="song list"
         style={{ width: lyrics ? '330px' : '450px' }}
       >
-        <Divider />
+        <Divider classes={{ root: props.classes.divider }} />
         {album.map((song, i) => {
           return <Song songName={song.name} songUrl={song.preview_url} index={i + 1} key={song.id} />
         })}
